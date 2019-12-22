@@ -52,7 +52,8 @@ export default {
       loading: true,
       started: false,
       finished: false,
-      gameScreen: 'TitleScreen'
+      gameScreen: 'TitleScreen',
+      quizIndex: 0
     }
   },
   computed: {
@@ -69,6 +70,7 @@ export default {
       this.content = content.value
       this.loading = false
     }
+    this.quizIndex = this.quizIndexRoute
   },
   async mounted() {
     const content = await getGameContent.next()
