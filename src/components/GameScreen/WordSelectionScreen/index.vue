@@ -1,7 +1,9 @@
 <template>
   <div>
     Word Selection
-    {{ wordCategories }}
+    <div v-for="category in wordCategories" :key="category">
+      <div>{{ category }}</div>
+    </div>
   </div>
 </template>
 
