@@ -99,9 +99,9 @@ export default {
       this.gameScreen = screen
     },
     gameData() {
-      const { score, wordIndex, content } = this
+      const { score, quizIndex, content, words } = this
       return {
-        score, wordIndex, content
+        score, quizIndex, content, words
       }
     },
     onGameStart(index) {
