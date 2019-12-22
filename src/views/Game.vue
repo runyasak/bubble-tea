@@ -11,6 +11,7 @@
         :is="gameScreen"
         :game-data="gameData"
         @changeScreen="onScreenChangingRequested"
+        @gameStart="onGameStart"
       />
     </div>
   </div>
@@ -100,6 +101,9 @@ export default {
       return {
         score, wordIndex, content
       }
+    },
+    onGameStart(index) {
+      this.wordIndex = index
     }
   }
 }
