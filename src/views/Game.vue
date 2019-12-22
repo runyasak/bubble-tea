@@ -2,9 +2,14 @@
   <div
     id="game-page"
     class="h-screen overflow-hidden">
-    <div class="h-full flex items-center justify-center bg-primary text-white _fs-25vh">
-      <div class="w-10/12 break-all text-center">
-        {{ wordText }}
+    <div v-if="loading">
+      Loading
+    </div>
+    <div v-else>
+      <div class="h-full flex items-center justify-center bg-primary text-white _fs-25vh">
+        <div class="w-10/12 break-all text-center">
+          {{ wordText }}
+        </div>
       </div>
     </div>
     <div
@@ -33,7 +38,8 @@ export default {
     return {
       wordIndex: 0,
       score: 0,
-      content: {}
+      content: {},
+      loading: true
     }
   },
   computed: {
@@ -48,6 +54,7 @@ export default {
     const content = await getGameContent.next()
     if (content) {
       this.content = content.value
+      this.loading = false
     }
   },
   async mounted() {
