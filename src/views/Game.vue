@@ -49,6 +49,7 @@
 import logics from '../logics'
 import Loader from '../components/Common-UI/Loader/index.vue'
 import TitleScreen from '../components/GameScreen/TitleScreen/index.vue'
+import PlayScreen from '../components/GameScreen/PlayScreen/index.vue'
 
 const getGameContent = logics.getGameContent()
 
@@ -56,7 +57,8 @@ export default {
   name: 'GamePage',
   components: {
     Loader,
-    TitleScreen
+    TitleScreen,
+    PlayScreen
   },
   props: {
     quizIndex: {
