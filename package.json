@@ -20,26 +20,17 @@
     "@vue/cli-plugin-router": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
     "@vue/eslint-config-airbnb": "^4.0.0",
+    "@vue/eslint-config-standard": "^5.0.1",
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.0",
     "vue-template-compiler": "^2.6.10"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/airbnb"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
   },
   "browserslist": [
     "> 1%",
