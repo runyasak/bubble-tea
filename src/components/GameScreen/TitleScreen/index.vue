@@ -23,7 +23,7 @@
 export default {
   methods: {
     startGame() {
-      this.$emit('changeScreen', 'PlayScreen')
+      this.$emit('changeScreen', 'WordSelectionScreen')
     },
     editWord() {
       this.$emit('changeScreen', 'WordEditingScreen')
