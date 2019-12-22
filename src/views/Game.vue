@@ -59,9 +59,6 @@ export default {
   computed: {
     words () {
       return this.content[this.quizIndex].words
-    },
-    wordText () {
-      return this.words[this.wordIndex].text
     }
   },
   async created() {
@@ -79,22 +76,6 @@ export default {
     }
   },
   methods: {
-    onNextWord () {
-      this.wordIndex += 1
-      if (this.wordIndex === this.words.length) {
-        this.finished = true
-      }
-    },
-    onCorrect () {
-      this.score += 1
-      this.onNextWord()
-    },
-    playAgain () {
-      this.wordIndex = 0
-      this.score = 0
-      this.started = false
-      this.finished = false
-    },
     onScreenChangingRequested(screen) {
       this.gameScreen = screen
     },
