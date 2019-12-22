@@ -1,8 +1,13 @@
 <template>
   <div>
     Word Selection
-    <div v-for="category in wordCategories" :key="category.index">
-      <div>
+    <div
+      v-for="category in wordCategories"
+      :key="category.index"
+    >
+      <div
+        @click="startGame(category.index)"
+      >
         {{ category.title }}
       </div>
     </div>
@@ -34,6 +39,12 @@ export default {
         }))
       }
       return wordCategories
+    }
+  },
+  methods: {
+    startGame(index) {
+      this.$emit('gameStart', index)
+      this.$emit('changeScreen', 'PlayScreen')
     }
   }
 }
