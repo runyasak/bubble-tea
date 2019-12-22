@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import db from '../../public/db.json'
 import logics from '../logics'
 
 const getGameContent = logics.getGameContent()
@@ -39,7 +38,7 @@ export default {
   },
   computed: {
     words () {
-      return db[this.quizIndex].words
+      return this.content[this.quizIndex].words
     },
     wordText () {
       return this.words[this.wordIndex].text
