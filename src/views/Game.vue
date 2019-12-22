@@ -20,6 +20,8 @@
 import db from '../../public/db.json'
 import logics from '../logics'
 
+const getGameContent = logics.getGameContent()
+
 export default {
   name: 'GamePage',
   props: {
@@ -43,6 +45,18 @@ export default {
       return this.words[this.wordIndex].text
     }
   },
+  async created() {
+    const content = await getGameContent.next()
+    if (content) {
+      this.content = content.value
+    }
+  },
+  async mounted() {
+    const content = await getGameContent.next()
+    if (content) {
+      this.content = content.value
+    }
+  },
   methods: {
     onNextWord () {
       this.wordIndex += 1
@@ -51,9 +65,6 @@ export default {
       this.score += 1
       this.onNextWord()
     }
-  },
-  async created() {
-    this.content = await logics.fetchGameContent()
   }
 }
 </script>
