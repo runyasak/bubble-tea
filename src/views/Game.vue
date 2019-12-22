@@ -12,6 +12,7 @@
         </div>
       </div>
       <div v-if="finished">
+        Summary Score {{ score }}
         <div @click="playAgain">
           Play Again
         </div>
@@ -106,6 +107,7 @@ export default {
     },
     playAgain () {
       this.wordIndex = 0
+      this.score = 0
       this.started = false
       this.finished = false
     }
