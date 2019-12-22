@@ -105,7 +105,7 @@ export default {
       }
     },
     onGameStart(index) {
-      this.wordIndex = index
+      this.quizIndex = index
     }
   }
 }
