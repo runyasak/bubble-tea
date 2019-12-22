@@ -1,8 +1,10 @@
 <template>
   <div>
     Word Selection
-    <div v-for="category in wordCategories" :key="category">
-      <div>{{ category }}</div>
+    <div v-for="category in wordCategories" :key="category.index">
+      <div>
+        {{ category.title }}
+      </div>
     </div>
   </div>
 </template>
@@ -26,7 +28,10 @@ export default {
       if ('content' in gameData) {
         delete gameData.content.mode
         const categories = Object.keys(this.gameData().content)
-        wordCategories = categories.map((category) => gameData.content[category].title)
+        wordCategories = categories.map((category) => ({
+          index: category,
+          title: gameData.content[category].title
+        }))
       }
       return wordCategories
     }
