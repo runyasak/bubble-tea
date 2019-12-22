@@ -7,7 +7,7 @@
       <loader />
     </div>
     <div v-else>
-      <component :is="gameScreen" />
+      <component :is="gameScreen" @changeScreen="onScreenChangingRequested" />
     </div>
   </div>
 </template>
@@ -81,6 +81,9 @@ export default {
       this.score = 0
       this.started = false
       this.finished = false
+    },
+    onScreenChangingRequested(screen) {
+      this.gameScreen = screen
     }
   }
 }
