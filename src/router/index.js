@@ -19,7 +19,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/game/:quizIndex',
+    path: '/game/:quizIndexRoute',
     name: 'game',
     props: true,
     component: () => import(/* webpackChunkName: "about" */ '../views/Game.vue')

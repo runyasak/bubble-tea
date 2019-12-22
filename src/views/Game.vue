@@ -39,7 +39,7 @@ export default {
     ScoreboardScreen
   },
   props: {
-    quizIndex: {
+    quizIndexRoute: {
       type: [String, Number],
       default: 0
     }
