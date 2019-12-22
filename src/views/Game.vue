@@ -7,7 +7,11 @@
       <loader />
     </div>
     <div v-else>
-      <component :is="gameScreen" @changeScreen="onScreenChangingRequested" />
+      <component
+        :is="gameScreen"
+        :game-data="gameData"
+        @changeScreen="onScreenChangingRequested"
+      />
     </div>
   </div>
 </template>
@@ -90,6 +94,12 @@ export default {
     },
     onScreenChangingRequested(screen) {
       this.gameScreen = screen
+    },
+    gameData() {
+      const { score, wordIndex, content } = this
+      return {
+        score, wordIndex, content
+      }
     }
   }
 }
