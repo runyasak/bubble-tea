@@ -11,13 +11,41 @@
           {{ wordText }}
         </div>
       </div>
+      <div v-if="finished">
+        <div @click="playAgain">
+          Play Again
+        </div>
+      </div>
+      <div v-else>
+        <div v-if="wordIndex < words.length && started">
+          <div class="h-full flex items-center justify-center bg-primary text-white _fs-25vh">
+            <div class="w-10/12 break-all text-center">
+              {{ wordText }}
+            </div>
+          </div>
+          <div
+            class="fixed w-6/12 h-full top-0"
+            @click="onCorrect"
+          >
+            Correct
+          </div>
+          <div
+            class="fixed w-6/12 h-full top-0 left-1/2"
+            @click="onNextWord"
+          >
+            Wrong
+          </div>
+        </div>
+        <div v-else>
+          <div
+            class="fixed w-6/12 h-full top-0 left-1/2"
+            @click="started = true"
+          >
+            Start Game
+          </div>
+        </div>
+      </div>
     </div>
-    <div
-      class="fixed w-6/12 h-full top-0"
-      @click="onCorrect" />
-    <div
-      class="fixed w-6/12 h-full top-0 left-1/2"
-      @click="onNextWord" />
   </div>
 </template>
 
@@ -39,7 +67,9 @@ export default {
       wordIndex: 0,
       score: 0,
       content: {},
-      loading: true
+      loading: true,
+      started: false,
+      finished: false
     }
   },
   computed: {
@@ -66,10 +96,18 @@ export default {
   methods: {
     onNextWord () {
       this.wordIndex += 1
+      if (this.wordIndex === this.words.length) {
+        this.finished = true
+      }
     },
     onCorrect () {
       this.score += 1
       this.onNextWord()
+    },
+    playAgain () {
+      this.wordIndex = 0
+      this.started = false
+      this.finished = false
     }
   }
 }
