@@ -3,7 +3,7 @@
     id="game-page"
     class="h-screen overflow-hidden">
     <div v-if="loading">
-      Loading
+      <loader />
     </div>
     <div v-else>
       <div v-if="finished">
@@ -47,11 +47,15 @@
 
 <script>
 import logics from '../logics'
+import Loader from '../components/Common-UI/Loader/index.vue'
 
 const getGameContent = logics.getGameContent()
 
 export default {
   name: 'GamePage',
+  components: {
+    Loader
+  },
   props: {
     quizIndex: {
       type: [String, Number],
