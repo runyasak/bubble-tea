@@ -2,11 +2,9 @@
   <div
     id="game-page"
     class="h-screen overflow-hidden">
-    <div class="h-full flex items-center justify-center bg-primary text-white _fs-25vh">
-      <div class="w-10/12 break-all text-center">
-        {{ wordText }}
-      </div>
-    </div>
+    <game-word-screen
+      :color="screenColor"
+      :word-text="wordText" />
     <div
       class="fixed w-6/12 h-full top-0"
       @click="onCorrect" />
@@ -21,6 +19,9 @@ import db from '../../public/db.json'
 
 export default {
   name: 'GamePage',
+  components: {
+    GameWordScreen: () => import('@/components/GameWordScreen')
+  },
   props: {
     quizIndex: {
       type: [String, Number],
@@ -39,6 +40,9 @@ export default {
     },
     wordText () {
       return this.words[this.wordIndex].text
+    },
+    screenColor () {
+      return 'primary'
     }
   },
   methods: {
