@@ -10,7 +10,7 @@
       @click="onCorrect" />
     <div
       class="fixed w-6/12 h-full top-0 left-1/2"
-      @click="onNextWord" />
+      @click="onSkip" />
   </div>
 </template>
 
@@ -31,7 +31,11 @@ export default {
   data () {
     return {
       wordIndex: 0,
-      score: 0
+      score: 0,
+      screenActive: {
+        correct: false,
+        skip: false
+      }
     }
   },
   computed: {
@@ -39,18 +43,43 @@ export default {
       return db[this.quizIndex].words
     },
     wordText () {
+      if (this.screenActive.correct) {
+        return 'ถูกต้อง'
+      }
+
+      if (this.screenActive.skip) {
+        return 'ข้าม'
+      }
+
       return this.words[this.wordIndex].text
     },
     screenColor () {
+      if (this.screenActive.correct) {
+        return 'success'
+      }
+
+      if (this.screenActive.skip) {
+        return 'secondary'
+      }
+
       return 'primary'
     }
   },
   methods: {
+    setTimeOutScreen (type = 'correct', timeout = 1000) {
+      this.screenActive[type] = true
+      setTimeout(() => { this.screenActive[type] = false }, timeout)
+    },
     onNextWord () {
       this.wordIndex += 1
     },
+    onSkip () {
+      this.setTimeOutScreen('skip')
+      this.onNextWord()
+    },
     onCorrect () {
       this.score += 1
+      this.setTimeOutScreen('correct')
       this.onNextWord()
     }
   }
