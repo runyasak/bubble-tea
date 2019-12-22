@@ -20,8 +20,8 @@ export default {
       content: {}
     }
   },
-  created() {
-    this.content = logics.fetchGameContent()
+  async created() {
+    this.content = await logics.fetchGameContent()
   }
 }
 </script>

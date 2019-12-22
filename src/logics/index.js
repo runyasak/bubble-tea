@@ -6,16 +6,18 @@ export default {
   fetchGameContent
 }
 
-function fetchGameContent() {
+async function fetchGameContent() {
   let content = JSON.parse(localStorage.getItem('content'))
   if (!content) {
-    axios.get('/db.json')
-      .then((r) => {
-        if (r.status === 200) {
-          content = r.data
-          localStorage.setItem('content', JSON.stringify(content))
-        }
-      })
+    try {
+      const result = await axios.get('/db.json')
+      if (result.status === 200) {
+        content = result.data
+        localStorage.setItem('content', JSON.stringify(content))
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
   return content || {}
 }
