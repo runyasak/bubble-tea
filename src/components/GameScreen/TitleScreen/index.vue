@@ -11,7 +11,11 @@
     >
       Edit Word
     </button>
-    <button>View Scores</button>
+    <button
+      @click="viewScores"
+    >
+      View Scores
+    </button>
   </div>
 </template>
 
@@ -23,6 +27,9 @@ export default {
     },
     editWord() {
       this.$emit('changeScreen', 'WordEditingScreen')
+    },
+    viewScores() {
+      this.$emit('changeScreen', 'ScoreboardScreen')
     }
   }
 }
