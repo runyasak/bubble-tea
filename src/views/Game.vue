@@ -11,7 +11,17 @@
 </template>
 
 <script>
+import logics from '../logics'
+
 export default {
-  name: 'GamePage'
+  name: 'GamePage',
+  data() {
+    return {
+      content: {}
+    }
+  },
+  created() {
+    this.content = logics.fetchGameContent()
+  }
 }
 </script>
