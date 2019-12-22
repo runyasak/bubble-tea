@@ -37,7 +37,7 @@
             class="fixed w-6/12 h-full top-0 left-1/2"
             @click="started = true"
           >
-            Start Game
+            <title-screen />
           </div>
         </div>
       </div>
@@ -48,13 +48,15 @@
 <script>
 import logics from '../logics'
 import Loader from '../components/Common-UI/Loader/index.vue'
+import TitleScreen from '../components/GameScreen/TitleScreen/index.vue'
 
 const getGameContent = logics.getGameContent()
 
 export default {
   name: 'GamePage',
   components: {
-    Loader
+    Loader,
+    TitleScreen
   },
   props: {
     quizIndex: {
