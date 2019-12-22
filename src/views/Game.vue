@@ -34,7 +34,8 @@ export default {
       score: 0,
       screenActive: {
         correct: false,
-        skip: false
+        skip: false,
+        finish: false
       }
     }
   },
@@ -51,6 +52,10 @@ export default {
         return 'ข้าม'
       }
 
+      if (this.screenActive.finish) {
+        return 'จบเกม'
+      }
+
       return this.words[this.wordIndex].text
     },
     screenColor () {
@@ -62,7 +67,14 @@ export default {
         return 'secondary'
       }
 
+      if (this.screenActive.finish) {
+        return 'gray-700'
+      }
+
       return 'primary'
+    },
+    isFinished () {
+      return this.score === this.words.length
     }
   },
   methods: {
@@ -79,8 +91,12 @@ export default {
     },
     onCorrect () {
       this.score += 1
-      this.setTimeOutScreen('correct')
-      this.onNextWord()
+      if (this.isFinished) {
+        this.screenActive.finish = true
+      } else {
+        this.setTimeOutScreen('correct')
+        this.onNextWord()
+      }
     }
   }
 }
