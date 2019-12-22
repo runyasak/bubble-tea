@@ -10,6 +10,10 @@ module.exports = {
       neutral: '#34495E',
       success: '#2ECC71',
       danger: '#E74C3C'
+    },
+    inset: {
+      '0': 0,
+      '1/2': '50%'
     }
   },
   variants: {},
