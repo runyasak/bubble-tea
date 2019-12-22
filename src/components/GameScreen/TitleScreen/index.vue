@@ -1,7 +1,7 @@
 <template>
   <div>
     <span>Bubble Tea</span>
-    <button>Start Game</button>
+    <button @click="startGame">Start Game</button>
     <button>Edit Word</button>
     <button>View Scores</button>
   </div>
@@ -9,7 +9,11 @@
 
 <script>
 export default {
-
+  methods: {
+    startGame() {
+      this.$emit('changeScreen', 'PlayScreen')
+    }
+  }
 }
 </script>
 
