@@ -1,46 +1,13 @@
 <template>
   <div
     id="game-page"
-    class="h-screen overflow-hidden">
+    class="h-screen overflow-hidden"
+  >
     <div v-if="loading">
       <loader />
     </div>
     <div v-else>
-      <div v-if="finished">
-        Summary Score {{ score }}
-        <div @click="playAgain">
-          Play Again
-        </div>
-      </div>
-      <div v-else>
-        <div v-if="wordIndex < words.length && started">
-          <div class="h-full flex items-center justify-center bg-primary text-white _fs-25vh">
-            <div class="w-10/12 break-all text-center">
-              {{ wordText }}
-            </div>
-          </div>
-          <div
-            class="fixed w-6/12 h-full top-0"
-            @click="onCorrect"
-          >
-            Correct
-          </div>
-          <div
-            class="fixed w-6/12 h-full top-0 left-1/2"
-            @click="onNextWord"
-          >
-            Wrong
-          </div>
-        </div>
-        <div v-else>
-          <div
-            class="fixed w-6/12 h-full top-0 left-1/2"
-            @click="started = true"
-          >
-            <title-screen />
-          </div>
-        </div>
-      </div>
+      <component :is="gameScreen" />
     </div>
   </div>
 </template>
@@ -73,7 +40,8 @@ export default {
       content: {},
       loading: true,
       started: false,
-      finished: false
+      finished: false,
+      gameScreen: 'TitleScreen'
     }
   },
   computed: {
