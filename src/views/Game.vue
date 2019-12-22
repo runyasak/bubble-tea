@@ -6,11 +6,6 @@
       Loading
     </div>
     <div v-else>
-      <div class="h-full flex items-center justify-center bg-primary text-white _fs-25vh">
-        <div class="w-10/12 break-all text-center">
-          {{ wordText }}
-        </div>
-      </div>
       <div v-if="finished">
         Summary Score {{ score }}
         <div @click="playAgain">
