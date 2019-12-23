@@ -12,6 +12,7 @@
         :game-data="gameData"
         @changeScreen="onScreenChangingRequested"
         @gameStart="onGameStart"
+        @updateScore="onScoreUpdate"
       />
     </div>
   </div>
@@ -89,6 +90,9 @@ export default {
     },
     onGameStart(index) {
       this.quizIndex = index
+    },
+    onScoreUpdate(score) {
+      this.score = score
     }
   }
 }
