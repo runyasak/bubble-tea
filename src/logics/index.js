@@ -2,7 +2,8 @@ import axios from 'axios'
 /* eslint-disable no-use-before-define */
 
 export default {
-  getGameContent
+  getGameContent,
+  updateGameContentLocally
 }
 
 async function* getGameContent() {
@@ -32,4 +33,10 @@ async function fetchGameContent() {
     console.log(e)
   }
   return content
+}
+
+function updateGameContentLocally(key, content) {
+  const currentGameContent = JSON.parse(localStorage.getItem('content'))
+  currentGameContent[key] = content
+  localStorage.setItem('content', JSON.stringify(currentGameContent))
 }
