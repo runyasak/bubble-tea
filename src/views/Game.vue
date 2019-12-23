@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import db from '../../public/db.json'
+import logics from '../logics'
 
 export default {
   name: 'GamePage',
@@ -30,7 +30,7 @@ export default {
   },
   data () {
     return {
-      words: db[this.quizIndex].words,
+      words: [],
       skipWords: [],
       wordIndex: 0,
       score: 0,
@@ -56,7 +56,7 @@ export default {
         return 'จบเกม'
       }
 
-      return this.words[this.wordIndex].text
+      return this.words.length > 0 ? this.words[this.wordIndex].text : ''
     },
     screenColor () {
       if (this.screenActive.correct) {
@@ -75,6 +75,13 @@ export default {
     },
     isFinished () {
       return this.score === this.maxScore
+    }
+  },
+  async created() {
+    const content = await logics.getGameContent().next()
+
+    if (content) {
+      this.words = content.value[this.quizIndex].words
     }
   },
   mounted () {
