@@ -11,6 +11,9 @@ module.exports = {
       success: '#2ECC71',
       danger: '#E74C3C'
     },
+    minWidth: {
+      25: '6.25rem'
+    },
     inset: {
       '0': 0,
       '1/2': '50%'
