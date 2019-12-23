@@ -1,6 +1,9 @@
 <template>
   <div>
     Total Score {{ score }}
+    <div @click="playAgain">
+      Play Again
+    </div>
   </div>
 </template>
 
@@ -20,6 +23,11 @@ export default {
     score() {
       const gameData = this.gameData()
       return gameData.score
+    }
+  },
+  methods: {
+    playAgain() {
+      this.$emit('changeScreen', 'PlayScreen')
     }
   }
 }
