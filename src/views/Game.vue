@@ -2,7 +2,12 @@
   <div
     id="game-page"
     class="h-screen overflow-hidden">
-    <template v-if="!isFinished">
+    <template v-if="isPrepared">
+      <game-word-screen
+        color="gray-700"
+        :word-text="`${prepareTime}`" />
+    </template>
+    <template v-else-if="!isFinished">
       <div class="fixed top-0 text-4xl text-white ml-4 mt-4">
         {{ gameTime }}
       </div>
@@ -28,6 +33,7 @@
 import logics from '../logics'
 
 let gameInterval
+let prepareInterval
 
 export default {
   name: 'GamePage',
@@ -48,6 +54,7 @@ export default {
       score: 0,
       maxScore: 0,
       gameTime: 60,
+      prepareTime: 3,
       screenActive: {
         correct: false,
         skip: false,
@@ -86,15 +93,26 @@ export default {
 
       return 'primary'
     },
+    isPrepared () {
+      return this.prepareTime > 0
+    },
     isFinished () {
       return this.gameTime === 0 || this.score === this.maxScore
     }
   },
   async created() {
+    this.gameTime += this.prepareTime
     gameInterval = setInterval(() => {
       this.gameTime -= 1
       if (this.gameTime === 0) {
         clearInterval(gameInterval)
+      }
+    }, 1000)
+
+    prepareInterval = setInterval(() => {
+      this.prepareTime -= 1
+      if (this.prepareTime === 0) {
+        clearInterval(prepareInterval)
       }
     }, 1000)
 
@@ -110,6 +128,7 @@ export default {
   },
   beforeDestroy() {
     clearInterval(gameInterval)
+    clearInterval(prepareInterval)
     window.removeEventListener('keyup', this.onKeyup)
   },
   methods: {
@@ -121,13 +140,15 @@ export default {
       return this.words.find((word, index) => index === value)
     },
     onKeyup ({ keyCode }) {
-      const isKeyupLeft = keyCode === 37
-      const isKeyupRight = keyCode === 39
+      if (!this.isPrepared && !this.isFinished) {
+        const isKeyupLeft = keyCode === 37
+        const isKeyupRight = keyCode === 39
 
-      if (isKeyupLeft) {
-        this.onSkip()
-      } else if (isKeyupRight) {
-        this.onCorrect()
+        if (isKeyupLeft) {
+          this.onSkip()
+        } else if (isKeyupRight) {
+          this.onCorrect()
+        }
       }
     },
     onNextWord () {
