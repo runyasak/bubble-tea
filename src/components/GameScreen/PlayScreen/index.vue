@@ -34,7 +34,8 @@ export default {
   },
   data() {
     return {
-      wordIndex: 0
+      wordIndex: 0,
+      score: 0
     }
   },
   computed: {
@@ -50,7 +51,9 @@ export default {
     onNextWord () {
       this.wordIndex += 1
       if (this.wordIndex === this.words.length) {
-        // this.finished = true
+        this.wordIndex = 0
+        this.$emit('updateScore', this.score)
+        this.$emit('changeScreen', 'SummaryScreen')
       }
     },
     onCorrect () {
