@@ -30,8 +30,11 @@ export default {
   },
   data () {
     return {
+      words: db[this.quizIndex].words,
+      skipWords: [],
       wordIndex: 0,
       score: 0,
+      maxScore: 0,
       screenActive: {
         correct: false,
         skip: false,
@@ -40,9 +43,6 @@ export default {
     }
   },
   computed: {
-    words () {
-      return db[this.quizIndex].words
-    },
     wordText () {
       if (this.screenActive.correct) {
         return 'ถูกต้อง'
@@ -74,10 +74,11 @@ export default {
       return 'primary'
     },
     isFinished () {
-      return this.score === this.words.length
+      return this.score === this.maxScore
     }
   },
   mounted () {
+    this.maxScore = this.words.length
     window.addEventListener('keyup', this.onKeyup)
   },
   beforeDestroy() {
@@ -87,6 +88,9 @@ export default {
     setTimeOutScreen (type = 'correct', timeout = 1000) {
       this.screenActive[type] = true
       setTimeout(() => { this.screenActive[type] = false }, timeout)
+    },
+    findWordByIndex (value) {
+      return this.words.find((word, index) => index === value)
     },
     onKeyup ({ keyCode }) {
       const isKeyupLeft = keyCode === 37
@@ -102,6 +106,7 @@ export default {
       this.wordIndex += 1
     },
     onSkip () {
+      this.skipWords.push(this.findWordByIndex(this.wordIndex))
       this.setTimeOutScreen('skip')
       this.onNextWord()
     },
@@ -109,6 +114,11 @@ export default {
       this.score += 1
       if (this.isFinished) {
         this.screenActive.finish = true
+      } else if (this.wordIndex === this.words.length - 1) {
+        this.words = [...this.skipWords]
+        this.skipWords = []
+        this.wordIndex = 0
+        this.setTimeOutScreen('correct')
       } else {
         this.setTimeOutScreen('correct')
         this.onNextWord()
