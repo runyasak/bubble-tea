@@ -152,7 +152,13 @@ export default {
       }
     },
     onNextWord () {
-      this.wordIndex += 1
+      if (this.wordIndex === this.words.length - 1) {
+        this.words = [...this.skipWords]
+        this.skipWords = []
+        this.wordIndex = 0
+      } else {
+        this.wordIndex += 1
+      }
     },
     onSkip () {
       this.skipWords.push(this.findWordByIndex(this.wordIndex))
@@ -162,14 +168,7 @@ export default {
     onCorrect () {
       this.score += 1
       this.setTimeOutScreen('correct')
-
-      if (this.wordIndex === this.words.length - 1) {
-        this.words = [...this.skipWords]
-        this.skipWords = []
-        this.wordIndex = 0
-      } else {
-        this.onNextWord()
-      }
+      this.onNextWord()
     }
   }
 }
