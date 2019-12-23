@@ -7,6 +7,9 @@
     <div @click="selectNewQuiz">
       Select New Quiz
     </div>
+    <div @click="backToTitle">
+      Back To Title
+    </div>
   </div>
 </template>
 
@@ -34,6 +37,9 @@ export default {
     },
     selectNewQuiz() {
       this.$emit('changeScreen', 'WordSelectionScreen')
+    },
+    backToTitle() {
+      this.$emit('changeScreen', 'TitleScreen')
     }
   }
 }
