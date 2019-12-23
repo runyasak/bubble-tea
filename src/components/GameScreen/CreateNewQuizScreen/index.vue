@@ -13,10 +13,15 @@
         </li>
       </template>
     </div>
+    <button @click="createQuiz">
+      Create Quiz
+    </button>
   </div>
 </template>
 
 <script>
+import logics from '../../../logics'
+
 export default {
   data() {
     return {
@@ -30,6 +35,19 @@ export default {
       if (this.newWord.length > 2) {
         this.words.push(this.newWord)
         this.newWord = ''
+      }
+    },
+    createQuiz() {
+      if (this.quizName.length > 3 && this.words.length > 5) {
+        const quizKey = `user-${this.quizName.replace(/\s+/g, '-').toLowerCase()}`
+        const quiz = {
+          title: this.quizName,
+          words: this.words.map((word, index) => ({
+            id: index,
+            text: word
+          }))
+        }
+        logics.updateGameContentLocally(quizKey, quiz)
       }
     }
   }
