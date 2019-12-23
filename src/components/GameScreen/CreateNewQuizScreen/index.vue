@@ -5,13 +5,35 @@
     <input v-model="quizName">
     <div>Add new word</div>
     <input v-model="newWord">
-    <button @click="addNewWord">
-      Add
-    </button>
     <div>
-      <template v-for="word in words">
+      <button
+        v-if="editing"
+        @click="editWord"
+      >
+        Save
+      </button>
+      <button
+        v-else
+        @click="addNewWord"
+      >
+        Add
+      </button>
+    </div>
+    <div>
+      <template v-for="(word, index) in words">
         <li :key="word">
           {{ word }}
+          <button
+            v-if="editing"
+            @click="cancelEdit()"
+          >
+            Cancel
+          </button>
+          <button
+            v-else
+            @click="getEditWord(index)">
+            Edit
+          </button>
         </li>
       </template>
     </div>
@@ -29,7 +51,10 @@ export default {
     return {
       quizName: '',
       newWord: '',
-      words: []
+      prevWord: '',
+      words: [],
+      editing: false,
+      editIndex: 0
     }
   },
   methods: {
@@ -51,6 +76,22 @@ export default {
         }
         logics.updateGameContentLocally(quizKey, quiz)
       }
+    },
+    getEditWord(index) {
+      this.prevWord = this.newWord
+      this.newWord = this.words[index]
+      this.editIndex = index
+      this.editing = true
+    },
+    editWord() {
+      if (this.newWord.length > 2) {
+        this.words[this.editIndex] = this.newWord
+        this.cancelEdit()
+      }
+    },
+    cancelEdit() {
+      this.newWord = this.prevWord
+      this.editing = false
     }
   }
 }
