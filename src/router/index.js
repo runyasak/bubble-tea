@@ -19,6 +19,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
+    path: '/create',
+    name: 'create',
+    props: true,
+    component: () => import('../views/CreateEdit.vue')
+  },
+  {
     path: '/game/:quizIndex',
     name: 'game',
     props: true,
