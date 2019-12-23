@@ -23,6 +23,7 @@ import Loader from '../components/Common-UI/Loader/index.vue'
 import TitleScreen from '../components/GameScreen/TitleScreen/index.vue'
 import WordSelectionScreen from '../components/GameScreen/WordSelectionScreen/index.vue'
 import PlayScreen from '../components/GameScreen/PlayScreen/index.vue'
+import SummaryScreen from '../components/GameScreen/SummaryScreen/index.vue'
 import WordEditingScreen from '../components/GameScreen/WordEditingScreen/index.vue'
 import ScoreboardScreen from '../components/GameScreen/ScoreboardScreen/index.vue'
 
@@ -35,6 +36,7 @@ export default {
     TitleScreen,
     WordSelectionScreen,
     PlayScreen,
+    SummaryScreen,
     WordEditingScreen,
     ScoreboardScreen
   },
