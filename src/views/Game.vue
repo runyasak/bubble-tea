@@ -13,6 +13,8 @@
 <script>
 import logics from '../logics'
 
+const getGameContent = logics.getGameContent()
+
 export default {
   name: 'GamePage',
   data() {
@@ -21,7 +23,16 @@ export default {
     }
   },
   async created() {
-    this.content = await logics.fetchGameContent()
+    const content = await getGameContent.next()
+    if (content) {
+      this.content = content.value
+    }
+  },
+  async mounted() {
+    const content = await getGameContent.next()
+    if (content) {
+      this.content = content.value
+    }
   }
 }
 </script>
