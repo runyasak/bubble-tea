@@ -77,10 +77,26 @@ export default {
       return this.score === this.words.length
     }
   },
+  mounted () {
+    window.addEventListener('keyup', this.onKeyup)
+  },
+  beforeDestroy() {
+    window.removeEventListener('keyup', this.onKeyup)
+  },
   methods: {
     setTimeOutScreen (type = 'correct', timeout = 1000) {
       this.screenActive[type] = true
       setTimeout(() => { this.screenActive[type] = false }, timeout)
+    },
+    onKeyup ({ keyCode }) {
+      const isKeyupLeft = keyCode === 37
+      const isKeyupRight = keyCode === 39
+
+      if (isKeyupLeft) {
+        this.onSkip()
+      } else if (isKeyupRight) {
+        this.onCorrect()
+      }
     },
     onNextWord () {
       this.wordIndex += 1
