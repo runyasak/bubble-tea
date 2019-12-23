@@ -34,6 +34,9 @@
             @click="getEditWord(index)">
             Edit
           </button>
+          <button @click="deleteWord(index)">
+            Delete
+          </button>
         </li>
       </template>
     </div>
@@ -88,6 +91,9 @@ export default {
         this.words[this.editIndex] = this.newWord
         this.cancelEdit()
       }
+    },
+    deleteWord(index) {
+      this.words.splice(index, 1)
     },
     cancelEdit() {
       this.newWord = this.prevWord
