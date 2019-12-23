@@ -4,6 +4,9 @@
     <div @click="playAgain">
       Play Again
     </div>
+    <div @click="selectNewQuiz">
+      Select New Quiz
+    </div>
   </div>
 </template>
 
@@ -28,6 +31,9 @@ export default {
   methods: {
     playAgain() {
       this.$emit('changeScreen', 'PlayScreen')
+    },
+    selectNewQuiz() {
+      this.$emit('changeScreen', 'WordSelectionScreen')
     }
   }
 }
