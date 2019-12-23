@@ -59,10 +59,6 @@ export default {
     onCorrect () {
       this.score += 1
       this.onNextWord()
-    },
-    playAgain () {
-      this.wordIndex = 0
-      this.score = 0
     }
   }
 }
