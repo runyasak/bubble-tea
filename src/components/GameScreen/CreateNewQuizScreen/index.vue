@@ -5,7 +5,9 @@
     <input v-model="quizName">
     <div>Add new word</div>
     <input v-model="newWord">
-    <button @click="addNewWord">Add</button>
+    <button @click="addNewWord">
+      Add
+    </button>
     <div>
       <template v-for="word in words">
         <li :key="word">
