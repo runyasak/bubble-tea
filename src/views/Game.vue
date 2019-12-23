@@ -26,6 +26,7 @@ import WordSelectionScreen from '../components/GameScreen/WordSelectionScreen/in
 import PlayScreen from '../components/GameScreen/PlayScreen/index.vue'
 import SummaryScreen from '../components/GameScreen/SummaryScreen/index.vue'
 import WordEditingScreen from '../components/GameScreen/WordEditingScreen/index.vue'
+import CreateNewQuizScreen from '../components/GameScreen/CreateNewQuizScreen/index.vue'
 import ScoreboardScreen from '../components/GameScreen/ScoreboardScreen/index.vue'
 
 const getGameContent = logics.getGameContent()
@@ -39,6 +40,7 @@ export default {
     PlayScreen,
     SummaryScreen,
     WordEditingScreen,
+    CreateNewQuizScreen,
     ScoreboardScreen
   },
   props: {
