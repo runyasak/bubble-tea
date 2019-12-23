@@ -2,20 +2,32 @@
   <div
     id="game-page"
     class="h-screen overflow-hidden">
-    <game-word-screen
-      :color="screenColor"
-      :word-text="wordText" />
-    <div
-      class="fixed w-6/12 h-full top-0"
-      @click="onCorrect" />
-    <div
-      class="fixed w-6/12 h-full top-0 left-1/2"
-      @click="onSkip" />
+    <template v-if="!isFinished">
+      <div class="fixed top-0 text-4xl text-white ml-4 mt-4">
+        {{ gameTime }}
+      </div>
+      <game-word-screen
+        :color="screenColor"
+        :word-text="wordText" />
+      <div
+        class="fixed w-6/12 h-full top-0"
+        @click="onCorrect" />
+      <div
+        class="fixed w-6/12 h-full top-0 left-1/2"
+        @click="onSkip" />
+    </template>
+    <template v-else>
+      <game-word-screen
+        color="gray-700"
+        word-text="จบเกม" />
+    </template>
   </div>
 </template>
 
 <script>
 import logics from '../logics'
+
+let gameInterval
 
 export default {
   name: 'GamePage',
@@ -35,6 +47,7 @@ export default {
       wordIndex: 0,
       score: 0,
       maxScore: 0,
+      gameTime: 60,
       screenActive: {
         correct: false,
         skip: false,
@@ -74,21 +87,29 @@ export default {
       return 'primary'
     },
     isFinished () {
-      return this.score === this.maxScore
+      return this.gameTime === 0 || this.score === this.maxScore
     }
   },
   async created() {
+    gameInterval = setInterval(() => {
+      this.gameTime -= 1
+      if (this.gameTime === 0) {
+        clearInterval(gameInterval)
+      }
+    }, 1000)
+
     const content = await logics.getGameContent().next()
 
     if (content) {
       this.words = content.value[this.quizIndex].words
+      this.maxScore = this.words.length
     }
   },
   mounted () {
-    this.maxScore = this.words.length
     window.addEventListener('keyup', this.onKeyup)
   },
   beforeDestroy() {
+    clearInterval(gameInterval)
     window.removeEventListener('keyup', this.onKeyup)
   },
   methods: {
@@ -119,15 +140,13 @@ export default {
     },
     onCorrect () {
       this.score += 1
-      if (this.isFinished) {
-        this.screenActive.finish = true
-      } else if (this.wordIndex === this.words.length - 1) {
+      this.setTimeOutScreen('correct')
+
+      if (this.wordIndex === this.words.length - 1) {
         this.words = [...this.skipWords]
         this.skipWords = []
         this.wordIndex = 0
-        this.setTimeOutScreen('correct')
       } else {
-        this.setTimeOutScreen('correct')
         this.onNextWord()
       }
     }
