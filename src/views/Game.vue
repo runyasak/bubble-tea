@@ -140,15 +140,18 @@ export default {
       return this.words.find((word, index) => index === value)
     },
     onKeyup ({ keyCode }) {
-      if (!this.isPrepared && !this.isFinished) {
-        const isKeyupLeft = keyCode === 37
-        const isKeyupRight = keyCode === 39
+      const isKeyupLeft = keyCode === 37
+      const isKeyupRight = keyCode === 39
 
+      if (!this.isPrepared && !this.isFinished) {
         if (isKeyupLeft) {
           this.onSkip()
         } else if (isKeyupRight) {
           this.onCorrect()
         }
+      } else if (this.isFinished && isKeyupRight) {
+        localStorage.setItem('score', `${this.score}/${this.maxScore}`)
+        this.$router.push({ name: 'result' })
       }
     },
     onNextWord () {
