@@ -13,8 +13,16 @@
         readonly
         class="shadow appearance-none
         border rounded w-full py-2 px-3 text-gray-700
-        leading-tight focus:outline-none focus:shadow-outline"
+        leading-tight focus:outline-none focus:shadow-outline mb-4"
         type="text">
+      <router-link
+        tag="button"
+        to="/"
+        class="min-w-25 bg-white text-center text-primary hover:bg-primary
+        border border-primary
+        hover:text-white font-bold py-2 px-4 rounded-full">
+        กลับสู่หน้าหลัก
+      </router-link>
     </div>
   </div>
 </template>
