@@ -1,9 +1,12 @@
 <template>
   <div id="result-page">
     <div class="flex flex-col justify-center items-center text-primary _full-height">
-      <span class="_fs-25vh">
-        0/10
-      </span>
+      <div class="_fs-10vh">
+        คะแนนของคุณ
+      </div>
+      <div class="_fs-25vh">
+        {{ score }} / {{ maxScore }}
+      </div>
       <router-link
         to="/"
         class="min-w-25 bg-white text-center text-primary hover:bg-primary
@@ -17,7 +20,20 @@
 
 <script>
 export default {
-  name: 'ResultPage'
+  name: 'ResultPage',
+  data () {
+    return {
+      localScoreText: localStorage.getItem('score')
+    }
+  },
+  computed: {
+    score () {
+      return this.localScoreText.split('/')[0]
+    },
+    maxScore () {
+      return this.localScoreText.split('/')[1]
+    }
+  }
 }
 </script>
 
