@@ -31,7 +31,7 @@ const routes = [
     component: () => import('../views/Export.vue')
   },
   {
-    path: '/game/:quizIndex',
+    path: '/game/:quizId',
     name: 'game',
     props: true,
     component: () => import('../views/Game.vue')

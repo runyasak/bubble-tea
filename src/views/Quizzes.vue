@@ -31,7 +31,7 @@
           :key="index"
           class="md:flex w-full md:w-1/3 p-2">
           <router-link
-            :to="{ name: 'game', params: { quizIndex: quiz.quizIndex }}"
+            :to="{ name: 'game', params: { quizId: quiz.quizId }}"
             class="relative rounded block shadow-lg
               p-12 w-full text-primary text-center text-2xl">
             <svg
@@ -45,7 +45,7 @@
               width="16"
               role="img"
               viewBox="0 0 512 512"
-              @click.prevent="onDeleteQuizById(quiz.quizIndex)">
+              @click.prevent="onDeleteQuizById(quiz.quizId)">
               <path
                 fill="currentColor"
                 d="M256 8C119
@@ -80,7 +80,7 @@ export default {
     quizzes () {
       return Object
         .entries(this.localQuizData)
-        .map((items) => ({ quizIndex: items[0], title: items[1].title }))
+        .map((items) => ({ quizId: items[0], title: items[1].title }))
     }
   },
   async created () {

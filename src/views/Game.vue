@@ -41,7 +41,7 @@ export default {
     GameWordScreen: () => import('@/components/GameWordScreen')
   },
   props: {
-    quizIndex: {
+    quizId: {
       type: [String, Number],
       default: 0
     }
@@ -119,7 +119,7 @@ export default {
     const content = await logics.getGameContent().next()
 
     if (content) {
-      this.words = content.value[this.quizIndex].words
+      this.words = content.value[this.quizId].words
       this.maxScore = this.words.length
     }
   },
