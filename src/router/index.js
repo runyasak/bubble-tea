@@ -25,6 +25,12 @@ const routes = [
     component: () => import('../views/CreateEdit.vue')
   },
   {
+    path: '/export',
+    name: 'export',
+    props: true,
+    component: () => import('../views/Export.vue')
+  },
+  {
     path: '/game/:quizIndex',
     name: 'game',
     props: true,
