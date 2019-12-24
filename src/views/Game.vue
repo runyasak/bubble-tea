@@ -24,7 +24,11 @@
     <template v-else>
       <game-word-screen
         color="gray-700"
-        word-text="จบเกม" />
+        word-text="จบเกม"
+        description="สัมผัสหน้าจอ หรือกดปุ่มลูกศรขวา" />
+      <div
+        class="fixed w-full h-full top-0"
+        @click="goToScorePage" />
     </template>
   </div>
 </template>
@@ -149,10 +153,13 @@ export default {
         } else if (isKeyupRight) {
           this.onCorrect()
         }
-      } else if (this.isFinished && isKeyupRight) {
-        localStorage.setItem('score', `${this.score}/${this.maxScore}`)
-        this.$router.push({ name: 'result' })
+      } else if (this.isFinished) {
+        this.goToScorePage()
       }
+    },
+    goToScorePage () {
+      localStorage.setItem('score', `${this.score}/${this.maxScore}`)
+      this.$router.push({ name: 'result' })
     },
     onNextWord () {
       if (this.wordIndex === this.words.length - 1) {
