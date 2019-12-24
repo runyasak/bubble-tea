@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 /* eslint-disable no-use-before-define */
 
 export default {
@@ -24,19 +22,7 @@ async function updateGameContentDownstream(localContent) {
 }
 
 async function fetchGameContent() {
-  let content = JSON.parse(localStorage.getItem('content'))
-  if (!content) {
-    try {
-      const result = await axios.get('/db.json')
-      if (result.status === 200) {
-        content = result.data
-        localStorage.setItem('content', JSON.stringify(content))
-      }
-    } catch (e) {
-      throw new Error(e.message)
-    }
-  }
-  return content || {}
+  return JSON.parse(localStorage.getItem('content')) || {}
 }
 
 function updateGameContentLocally(key, content) {
