@@ -1,6 +1,21 @@
 <template>
   <div id="quizzes-page">
     <div class="container mx-auto p-4">
+      <div class="pb-4 flex justify-end">
+        <router-link
+          to="/import"
+          class="min-w-25 bg-white text-center text-primary hover:bg-primary
+          border border-primary
+          hover:text-white font-bold py-2 px-4 rounded-full">
+          Import
+        </router-link>
+        <router-link
+          to="/export"
+          class="min-w-25 ml-6 bg-primary
+          hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-center">
+          Export
+        </router-link>
+      </div>
       <div class="flex flex-wrap -m-2">
         <div class="md:flex w-full md:w-1/3 p-2">
           <router-link
