@@ -37,6 +37,12 @@ const routes = [
     component: () => import('../views/Game.vue')
   },
   {
+    path: '/import',
+    name: 'import',
+    props: true,
+    component: () => import('../views/Import.vue')
+  },
+  {
     path: '/result',
     name: 'result',
     props: true,
