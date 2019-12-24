@@ -33,7 +33,7 @@ async function fetchGameContent() {
         localStorage.setItem('content', JSON.stringify(content))
       }
     } catch (e) {
-      console.log(e)
+      throw new Error(e.message)
     }
   }
   return content || {}
