@@ -123,7 +123,10 @@ export default {
     const content = await logics.getGameContent().next()
 
     if (content) {
-      this.words = content.value[this.quizId].words
+      const contentWords = content.value[this.quizId].words
+      const shuffleWords = contentWords.sort(() => 0.5 - Math.random())
+
+      this.words = shuffleWords
       this.maxScore = this.words.length
     }
   },
