@@ -59,6 +59,7 @@ export default {
       maxScore: 0,
       gameTime: 60,
       prepareTime: 3,
+      disabledUserAction: false,
       screenActive: {
         correct: false,
         skip: false,
@@ -141,7 +142,12 @@ export default {
   methods: {
     setTimeOutScreen (type = 'correct', timeout = 1000) {
       this.screenActive[type] = true
-      setTimeout(() => { this.screenActive[type] = false }, timeout)
+      this.disabledUserAction = true
+
+      setTimeout(() => {
+        this.screenActive[type] = false
+        this.disabledUserAction = false
+      }, timeout)
     },
     findWordByIndex (value) {
       return this.words.find((word, index) => index === value)
@@ -149,8 +155,9 @@ export default {
     onKeyup ({ keyCode }) {
       const isKeyupLeft = keyCode === 37
       const isKeyupRight = keyCode === 39
+      const canUserChangeWord = !this.isPrepared && !this.isFinished && !this.disabledUserAction
 
-      if (!this.isPrepared && !this.isFinished) {
+      if (canUserChangeWord) {
         if (isKeyupLeft) {
           this.onSkip()
         } else if (isKeyupRight) {
